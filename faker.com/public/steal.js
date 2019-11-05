@@ -18,4 +18,7 @@ function JSONP(url) {
 
 JSONP("http://user.com:8888/money").then(data => {
   console.log(data);
+  const p = document.createElement("p")
+  p.textContent = `我通过JSONP获取了${data.name}的余额为${data.account}`
+  document.body.appendChild(p)
 });

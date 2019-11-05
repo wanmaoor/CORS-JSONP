@@ -39,12 +39,17 @@ var server = http.createServer(function(request, response) {
     response.write(fs.readFileSync("./public/money.json"));
     response.end();
   } else if (path === "/money.js") {
-    response.statusCode = 200;
-    response.setHeader("Content-Type", "text/javascript;charset=utf-8");
-    const string = fs.readFileSync("./public/money.js").toString();
-    const data = fs.readFileSync("./public/money.json").toString()
-    response.write(string.replace("{{data}}", data));
-    response.end();
+    if (request.headers["referer"].indexOf("http://faker.com:8889") === 0) {
+      response.statusCode = 200;
+      response.setHeader("Content-Type", "text/javascript;charset=utf-8");
+      const string = fs.readFileSync("./public/money.js").toString();
+      const data = fs.readFileSync("./public/money.json").toString();
+      response.write(string.replace("{{data}}", data));
+      response.end();
+    } else {
+      response.statusCode = 404;
+      response.end();
+    }
   } else {
     response.statusCode = 404;
     response.setHeader("Content-Type", "text/html;charset=utf-8");

@@ -36,8 +36,14 @@ var server = http.createServer(function(request, response) {
   } else if (path === "/money.json") {
     response.statusCode = 200;
     response.setHeader("Content-Type", "text/json;charset=utf-8");
-    response.setHeader("Access-Control-Allow-Origin", "*");
     response.write(fs.readFileSync("./public/money.json"));
+    response.end();
+  } else if (path === "/money.js") {
+    response.statusCode = 200;
+    response.setHeader("Content-Type", "text/javascript;charset=utf-8");
+    const string = fs.readFileSync("./public/money.js").toString();
+    const data = fs.readFileSync("./public/money.json").toString()
+    response.write(string.replace("{{data}}", data));
     response.end();
   } else {
     response.statusCode = 404;

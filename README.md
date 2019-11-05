@@ -8,3 +8,7 @@
 2. 执行`node index.js [端口号]`
 
 **注意**: `user.com`的指定端口是`8888`, `faker.com`的指定端口是`8889`. `user.com`和`faker.com`在我本机上是修改了hosts映射.
+
+## 切换分支
+
+使用`Access-Control-Allow-Origin`的代码在`master`分支, JSONP在`JSONP`分支
